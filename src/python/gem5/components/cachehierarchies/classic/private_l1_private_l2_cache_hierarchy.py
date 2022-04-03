@@ -68,6 +68,9 @@ class PrivateL1PrivateL2CacheHierarchy(
         l1d_size: str,
         l1i_size: str,
         l2_size: str,
+        l1d_assoc: int,
+        l1i_assoc: int,
+        l2_assoc: int,
         membus: BaseXBar = _get_default_membus.__func__(),
     ) -> None:
         """
@@ -83,6 +86,18 @@ class PrivateL1PrivateL2CacheHierarchy(
 
         :type l2_size: str
 
+        :param l1d_assoc: The associativity of the L1 Data Cache (e.g., 8).
+
+        :type l1d_assoc: int
+
+        :param l1i_assoc: Associativity of the L1 Instruction Cache (e.g., 8).
+
+        :type l1i_assoc: int
+
+        :param l2_assoc: The associativity of the L2 Cache (e.g., 4).
+
+        :type l2_assoc: int
+
         :param membus: The memory bus. This parameter is optional parameter and
         will default to a 64 bit width SystemXBar is not specified.
 
@@ -93,11 +108,11 @@ class PrivateL1PrivateL2CacheHierarchy(
         AbstractTwoLevelCacheHierarchy.__init__(
             self,
             l1i_size=l1i_size,
-            l1i_assoc=8,
+            l1i_assoc=l1i_assoc,
             l1d_size=l1d_size,
-            l1d_assoc=8,
+            l1d_assoc=l1d_assoc,
             l2_size=l2_size,
-            l2_assoc=4,
+            l2_assoc=l2_assoc,
         )
 
         self.membus = membus
